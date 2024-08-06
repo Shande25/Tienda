@@ -3,9 +3,11 @@ package com.spring_boot.tienda.Entidad;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 
 @Entity
-
+@Data
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +18,15 @@ public class Producto {
     private Double precio;
     private int stock;
     private String descripcion;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id") // Este es el nombre de la columna en la tabla de productos
+    private Cliente cliente;
+    @OneToOne
+    @JoinColumn(name = "garantia_id")
+    private Garantia garantia;
+    @ManyToMany(mappedBy = "productos")
+    private List<Cliente> clientes;
     public Long getId() {
         return id;
     }

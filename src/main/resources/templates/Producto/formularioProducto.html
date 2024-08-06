@@ -8,28 +8,56 @@
     <title>Formulario</title>
 </head>
 <body>
-<form th:action="@{/guardar/producto}" method="post" th:object="${producto}">
-    <div class="mb-3">
-        <label for="id-codigo" class="form-label">Codigo</label>
-        <input type="number" class="form-control" id="id-codigo" th:field="*{id}">
-    </div>
-    <div class="mb-3">
-        <label for="id-nombre" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="id-nombre" th:field="*{nombre}">
-    </div>
-    <div class="mb-3">
-        <label for="id-precio" class="form-label">Precio</label>
-        <input type="text" class="form-control" id="id-precio" th:field="*{precio}">
-    </div>
-    <div class="mb-3">
-        <label for="id-stock" class="form-label">Stock</label>
-        <input type="number" class="form-control" id="id-stock" th:field="*{stock}">
-    </div>
-    <div class="mb-3">
-        <label for="id-descripcion" class="form-label">Descipcion</label>
-        <input type="text" class="form-control" id="id-descripcion" th:field="*{descripcion}">
-    </div>
-    <button type="submit" class="btn btn-guardar">Guardar</button>
-</form>
+<div class="container">
+    <!-- Formulario para agregar un nuevo cliente -->
+    <h2>Agregar Nuevo Cliente</h2>
+    <form th:action="@{/guardar/cliente}" method="post">
+        <div class="mb-3">
+            <label for="id-nombre-cliente" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="id-nombre-cliente" name="nombre" required>
+        </div>
+        <div class="mb-3">
+            <label for="id-apellido-cliente" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="id-apellido-cliente" name="apellido" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Agregar Cliente</button>
+    </form>
+
+    <hr>
+
+    <!-- Formulario para agregar un nuevo producto -->
+    <h2>Agregar Nuevo Producto</h2>
+    <form th:action="@{/guardar/producto}" method="post" th:object="${producto}">
+        <div class="mb-3">
+            <label for="id-codigo" class="form-label">Codigo</label>
+            <input type="number" class="form-control" id="id-codigo" th:field="*{id}">
+        </div>
+        <div class="mb-3">
+            <label for="id-nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="id-nombre" th:field="*{nombre}">
+        </div>
+        <div class="mb-3">
+            <label for="id-precio" class="form-label">Precio</label>
+            <input type="text" class="form-control" id="id-precio" th:field="*{precio}">
+        </div>
+        <div class="mb-3">
+            <label for="id-stock" class="form-label">Stock</label>
+            <input type="number" class="form-control" id="id-stock" th:field="*{stock}">
+        </div>
+        <div class="mb-3">
+            <label for="id-descripcion" class="form-label">Descripcion</label>
+            <input type="text" class="form-control" id="id-descripcion" th:field="*{descripcion}">
+        </div>
+        <div class="mb-3">
+            <label for="id-cliente" class="form-label">Cliente</label>
+            <select class="form-control" id="id-cliente" th:field="*{cliente}">
+                <option th:each="cliente : ${clientes}"
+                        th:value="${cliente.id}"
+                        th:text="${cliente.nombre + ' ' + cliente.apellido}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
 </body>
 </html>
