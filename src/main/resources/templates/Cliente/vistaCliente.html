@@ -15,19 +15,20 @@
             padding: 0;
         }
         h1 {
-            background-color: #007bff;
+            background-color: #6f42c1; /* Morado oscuro */
             color: #fff;
             padding: 20px;
             text-align: center;
             margin: 0;
-            font-size: 1.75rem;
+            font-size: 2rem;
+            border-bottom: 4px solid #5a2a91; /* Morado más oscuro */
         }
         .container {
             margin: 20px auto;
             padding: 20px;
             background-color: #ffffff;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 0.75rem;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
             max-width: 1200px;
         }
         table {
@@ -40,7 +41,7 @@
             border-bottom: 1px solid #ddd;
         }
         th {
-            background-color: #007bff;
+            background-color: #6f42c1; /* Morado oscuro */
             color: #fff;
             font-weight: bold;
         }
@@ -48,26 +49,27 @@
             background-color: #f9f9f9;
         }
         tr:hover {
-            background-color: #e3f2fd;
+            background-color: #e8eaf6; /* Color de hover más claro */
         }
         .btn-custom {
-            color: #007bff;
-            text-decoration: none;
-            border: 2px solid #007bff;
+            color: #fff;
+            background-color: #6f42c1; /* Morado oscuro */
+            border: 2px solid #6f42c1;
             padding: 8px 16px;
             border-radius: 0.375rem;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s, border-color 0.3s;
             font-size: 0.875rem;
         }
         .btn-custom:hover {
-            background-color: #007bff;
-            color: #fff;
+            background-color: #5a2a91; /* Morado más oscuro */
+            border-color: #5a2a91;
         }
         .no-records {
             text-align: center;
             font-style: italic;
             color: #6c757d;
             padding: 20px;
+            font-size: 1.25rem;
         }
     </style>
 </head>
@@ -92,15 +94,13 @@
                 <td th:text="${cliente.nombre}"></td>
                 <td th:text="${cliente.apellido}"></td>
                 <td>
-                    <ul class="list-unstyled">
-                        <li th:each="producto : ${cliente.productos}" th:text="${producto.nombre}">Nombre del Producto</li>
+                    <ul class="list-unstyled mb-0">
+                        <li th:each="producto : ${cliente.productos}" th:text="${producto.nombre}"></li>
                     </ul>
                 </td>
                 <td>
                     <!-- Enlace para agregar producto -->
                     <a th:href="@{/productos/agregar/{clienteId}(clienteId=${cliente.id})}" class="btn btn-custom">Agregar Producto</a>
-
-
                 </td>
             </tr>
             </tbody>
@@ -108,6 +108,5 @@
     </div>
     <p th:if="${clientes == null or #lists.isEmpty(clientes)}" class="no-records">No hay clientes registrados.</p>
 </div>
-
 </body>
 </html>
