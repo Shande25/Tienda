@@ -8,42 +8,44 @@
     <title>Productos</title>
 </head>
 <body>
-<h2>Lista de Productos</h2>
 <div class="container mt-3">
-    <table class="table table-hover">
+    <div class="border rounded p-4 shadow-sm">
+        <h2 class="mb-4">Lista de Productos</h2>
         <form th:action="@{/productos}" method="get" class="mb-3">
             <div class="input-group">
                 <input type="text" name="buscarProducto" class="form-control" placeholder="Buscar producto" th:value="${buscarProducto}">
-                <button class="btn btn-primary" type="submit">Buscar</button>
+                <button class="btn btn-custom" type="submit">Buscar</button>
             </div>
         </form>
-        <thead>
-        <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Descripción</th>
-            <th>Opciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="producto : ${productos}">
-            <td th:text="${producto.id}"></td>
-            <td th:text="${producto.nombre}"></td>
-            <td th:text="${producto.precio}"></td>
-            <td th:text="${producto.stock}"></td>
-            <td th:text="${producto.descripcion}"></td>
-            <td>
-                <a th:href="@{/editar/producto/} + ${producto.id}" class="btn btn-primary">Actualizar</a>
-                <a th:href="@{/eliminar/producto/} + ${producto.id}" class="btn btn-danger">Eliminar</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <a th:href="@{/formulario}" class="btn btn-success">Nuevo Producto</a>
-    <a th:href="@{/clientes}" class="btn btn-primary">Ver Clientes</a>
-    <a th:href="@{/productos/pdf}" class="btn btn-secondary">Lista de productos</a>
+        <table class="table table-hover mb-4">
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Descripción</th>
+                <th>Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="producto : ${productos}">
+                <td th:text="${producto.nombre}"></td>
+                <td th:text="${producto.precio}"></td>
+                <td th:text="${producto.stock}"></td>
+                <td th:text="${producto.descripcion}"></td>
+                <td>
+                    <a th:href="@{/editar/producto/} + ${producto.id}" class="btn btn-custom">Actualizar</a>
+                    <a th:href="@{/eliminar/producto/} + ${producto.id}" class="btn btn-custom">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-between">
+            <a th:href="@{/formulario}" class="btn btn-custom">Nuevo Producto</a>
+            <a th:href="@{/clientes}" class="btn btn-custom">Ver Clientes</a>
+            <a th:href="@{/productos/pdf}" class="btn btn-custom">Lista de productos</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Agregar Producto a Cliente</title>
+</head>
+<body>
+<h1>Agregar Producto a Cliente</h1>
+<form th:action="@{/agregar/producto/{clienteId}(clienteId=${cliente.id})}" method="post">
+    <label for="productoId">Producto:</label>
+    <select id="productoId" name="productoId">
+        <option th:each="producto : ${productos}" th:value="${producto.id}" th:text="${producto.nombre}"></option>
+    </select>
+    <button type="submit">Agregar</button>
+</form>
+</body>
+</html>

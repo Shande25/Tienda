@@ -13,25 +13,21 @@ public class ClienteServicio {
     @Autowired
     private ClienteRepositorio clienteRepositorio;
 
-    public List<Producto> buscarProductoByClienteId(Long clienteId){
-        return  clienteRepositorio.findById(clienteId)
-            .map(Cliente::getProductos)
+    public List<Producto> buscarProductoByClienteId(Long clienteId) {
+        return clienteRepositorio.findById(clienteId)
+                .map(Cliente::getProductos)
                 .orElse(List.of());
     }
 
     public Cliente obtenerClientePorId(Long clienteId) {
         return clienteRepositorio.findById(clienteId).orElse(null);
     }
+
     public void guardarCliente(Cliente cliente) {
         clienteRepositorio.save(cliente);
     }
 
-    public List<Cliente> obtenerTodosClientes() {
-        return clienteRepositorio.findAll();
-    }
     public List<Cliente> listarClientes() {
         return clienteRepositorio.findAll();
     }
-
-
 }

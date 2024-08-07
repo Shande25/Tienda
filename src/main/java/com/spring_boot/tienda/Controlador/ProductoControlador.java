@@ -26,15 +26,15 @@ public class ProductoControlador {
         List<Producto> productos = productoServicio.buscarProductoNombre(buscarProducto);
         model.addAttribute("buscarProducto", buscarProducto);
         model.addAttribute("productos", productos);
-        return "/Producto/vistaProductos";
+        return "Producto/vistaProductos"; // Verifica que esta plantilla exista
     }
 
     @GetMapping("/formulario")
     public String mostrarFormulario(Model model) {
         model.addAttribute("producto", new Producto());
-        List<Cliente> clientes = clienteServicio.listarClientes();  // Asegúrate de que esto no es nulo
+        List<Cliente> clientes = clienteServicio.listarClientes();
         model.addAttribute("clientes", clientes);
-        return "/Producto/formularioProducto";
+        return "Producto/formularioProducto"; // Verifica que esta plantilla exista
     }
 
     @PostMapping("/guardar/producto")
@@ -46,8 +46,8 @@ public class ProductoControlador {
     @GetMapping("/editar/producto/{id}")
     public String editarProducto(@PathVariable Long id, Model model) {
         Optional<Producto> producto = productoServicio.buscarProductoId(id);
-        model.addAttribute("producto", producto);
-        return "Producto/formularioProducto";
+        model.addAttribute("producto", producto.orElse(null));
+        return "Producto/formularioProducto"; // Verifica que esta plantilla exista
     }
 
     @GetMapping("/eliminar/producto/{id}")
@@ -55,12 +55,26 @@ public class ProductoControlador {
         productoServicio.eliminarProducto(id);
         return "redirect:/productos";
     }
+
     @PostMapping("/guardar/cliente")
     public String guardarCliente(@RequestParam String nombre, @RequestParam String apellido) {
         Cliente nuevoCliente = new Cliente();
         nuevoCliente.setNombre(nombre);
         nuevoCliente.setApellido(apellido);
         clienteServicio.guardarCliente(nuevoCliente);
-        return "redirect:/formulario"; // Redirige al formulario de producto o cualquier otra página
+        return "redirect:/formulario"; // Ajusta según la ruta correcta
+    }
+
+    @GetMapping("/agregarCliente")
+    public String agregarClienteForm(Model model) {
+        Cliente cliente = new Cliente(); // Crea un nuevo cliente o recupera uno de la base de datos
+        model.addAttribute("cliente", cliente);
+        return "Producto/agregarCliente"; // Asegúrate de que este nombre coincida con el archivo HTML
+    }
+
+    @PostMapping("/agregar/{clienteId}")
+    public String agregarProducto(@PathVariable Long clienteId, @RequestParam Long productoId) {
+        // Implementa la lógica para agregar el producto al cliente
+        return "redirect:/productos/" + clienteId; // Ajusta según la ruta correcta
     }
 }
